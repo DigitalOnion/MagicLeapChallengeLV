@@ -8,10 +8,8 @@ import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.outerspace.magicleapchallengelv.api.CoffeeMenu;
 import com.outerspace.magicleapchallengelv.api.CoffeeMenuItem;
-import com.outerspace.magicleapchallengelv.viewmodel.MenuCallback;
 import com.outerspace.magicleapchallengelv.api.CoffeeApi;
 
-import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -20,7 +18,7 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MenuModel {
+public class CoffeeNetworkModel {
 
     public static final String INVALID_RESPONSE = "invalid_response";
 
@@ -32,7 +30,7 @@ public class MenuModel {
 
     private CompositeDisposable disposables = new CompositeDisposable();
 
-    public MenuModel(MenuCallback callback) {
+    public CoffeeNetworkModel(MenuCallback callback) {
         this.callback = callback;
 
         gson = new GsonBuilder()
