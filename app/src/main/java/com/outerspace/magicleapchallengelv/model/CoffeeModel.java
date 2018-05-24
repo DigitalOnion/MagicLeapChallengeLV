@@ -9,6 +9,7 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.outerspace.magicleapchallengelv.api.CoffeeMenu;
 import com.outerspace.magicleapchallengelv.api.CoffeeMenuItem;
 import com.outerspace.magicleapchallengelv.api.CoffeeApi;
+import com.outerspace.magicleapchallengelv.viewmodel.MenuCallback;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -18,7 +19,7 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class CoffeeNetworkModel {
+public class CoffeeModel implements CoffeeModelInterface {
 
     public static final String INVALID_RESPONSE = "invalid_response";
 
@@ -30,7 +31,7 @@ public class CoffeeNetworkModel {
 
     private CompositeDisposable disposables = new CompositeDisposable();
 
-    public CoffeeNetworkModel(MenuCallback callback) {
+    public CoffeeModel(MenuCallback callback) {
         this.callback = callback;
 
         gson = new GsonBuilder()
@@ -50,6 +51,7 @@ public class CoffeeNetworkModel {
         api = retrofit.create(CoffeeApi.class);
     }
 
+    @Override
     public void requestCoffeeMenu() {
         Single<List<CoffeeMenu>> single =
                 api.apiRequestCoffeeMenu();         // query does not need arguments
@@ -70,6 +72,7 @@ public class CoffeeNetworkModel {
         disposables.add(disposable);
     }
 
+    @Override
     public void requestCoffeeItem(String itemId) {
         Single<CoffeeMenuItem> single =
                 api.apiRequestCoffeeMenuItem(itemId);   // query with one argument
