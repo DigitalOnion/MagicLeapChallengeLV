@@ -9,6 +9,8 @@ import com.outerspace.magicleapchallengelv.model.CoffeeModel;
 import com.outerspace.magicleapchallengelv.model.CoffeeModelInterface;
 import com.outerspace.magicleapchallengelv.view.MainViewInterface;
 
+import android.databinding.BindingAdapter;
+import android.view.View;
 import android.widget.TextView;
 
 public class MainActivityViewModel {
@@ -25,6 +27,10 @@ public class MainActivityViewModel {
 
     public void fetchCoffeeMenu() {
         model.requestCoffeeMenu();
+    }
+
+    public void onClickTestButton(View view) {
+        fetchCoffeeMenu();
     }
 
     private class MyMenuCallback implements  MenuCallback {

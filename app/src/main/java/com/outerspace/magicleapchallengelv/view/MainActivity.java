@@ -5,10 +5,12 @@ import java.util.List;
 import com.outerspace.magicleapchallengelv.R;
 import com.outerspace.magicleapchallengelv.api.CoffeeMenu;
 import com.outerspace.magicleapchallengelv.api.CoffeeMenuItem;
+import com.outerspace.magicleapchallengelv.databinding.ActivityMainBinding;
 import com.outerspace.magicleapchallengelv.model.CoffeeModel;
 import com.outerspace.magicleapchallengelv.viewmodel.MainActivityViewModel;
 import com.outerspace.magicleapchallengelv.viewmodel.MenuCallback;
 
+import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,16 +23,13 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
+        ActivityMainBinding binding = DataBindingUtil
+                .setContentView(this, R.layout.activity_main);
         viewModel = new MainActivityViewModel(this);
+        binding.setViewModel(viewModel);
     }
 
-
-
-    public void onClickTestButton(View view) {
-        viewModel.fetchCoffeeMenu();
-    }
 
     @Override
     public void onCoffeeMenuListReady(List<CoffeeMenu> coffeeMenuList) {
