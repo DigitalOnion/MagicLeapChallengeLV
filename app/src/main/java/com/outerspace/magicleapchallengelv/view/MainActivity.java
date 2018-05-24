@@ -35,13 +35,19 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCoffeeMenuItemResponse(CoffeeMenuItem coffeeMenuItem) { }
+            public void onCoffeeMenuItemResponse(CoffeeMenuItem coffeeMenuItem) {
+                TextView txt = findViewById(R.id.txt_test);
+                txt.setText(coffeeMenuItem.desc);
+            }
 
             @Override
-            public void onDataError(String message) { }
+            public void onDataError(String message) {
+                TextView txt = findViewById(R.id.txt_test);
+                txt.setText(message);
+            }
         };
 
         MenuModel model = new MenuModel(callback);
-        model.requestCoffeeMenu();
+        model.requestCoffeeItem("espresso");
     }
 }

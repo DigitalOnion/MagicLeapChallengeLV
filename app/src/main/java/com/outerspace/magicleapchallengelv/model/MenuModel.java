@@ -1,5 +1,6 @@
 package com.outerspace.magicleapchallengelv.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -20,6 +21,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MenuModel {
+
+    public static final String INVALID_RESPONSE = "invalid_response";
 
     private Gson gson = null;
     private Retrofit retrofit = null;
@@ -56,8 +59,14 @@ public class MenuModel {
         Disposable disposable = single
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .onErrorReturnItem(new ArrayList<>())
                 .subscribe(
-                        response -> {callback.onCoffeeMenuResponse(response);}
+                        response -> {
+                            if(response.size() > 0)
+                                callback.onCoffeeMenuResponse(response);
+                            else
+                                callback.onDataError(INVALID_RESPONSE);
+                        }
                 );
 
         disposables.add(disposable);
@@ -70,8 +79,14 @@ public class MenuModel {
         Disposable disposable = single
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .onErrorReturnItem(new CoffeeMenuItem())
                 .subscribe(
-                        response -> {callback.onCoffeeMenuItemResponse(response);}
+                        response -> {
+                            if(response.id == null || response.id.length() == 0)
+                                callback.onDataError(INVALID_RESPONSE);
+                            else
+                                callback.onCoffeeMenuItemResponse(response);
+                        }
                 );
 
         disposables.add(disposable);
