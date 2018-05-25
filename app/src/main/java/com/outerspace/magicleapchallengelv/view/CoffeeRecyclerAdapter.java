@@ -7,7 +7,9 @@ import com.outerspace.magicleapchallengelv.R;
 import com.outerspace.magicleapchallengelv.api.CoffeeMenu;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,12 +53,22 @@ public class CoffeeRecyclerAdapter extends RecyclerView.Adapter<CoffeeRecyclerAd
         public TextView holderId;
         public TextView holderDescription;
         public ImageView holderImage;
+        public ConstraintLayout holderLayout;
 
         public CoffeeViewHolder(View itemView) {
             super(itemView);
             holderId = itemView.findViewById(R.id.holder_name);
             holderDescription = itemView.findViewById(R.id.holder_description);
             holderImage = itemView.findViewById(R.id.holder_image);
+            holderLayout = itemView.findViewById(R.id.holder_layout);
+            holderLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Context context = itemView.getContext();
+                    Intent intent = new Intent(context, DetailActivity.class);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }
