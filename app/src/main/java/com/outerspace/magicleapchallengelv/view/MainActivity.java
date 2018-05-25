@@ -36,6 +36,12 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        viewModel.fetchCoffeeMenu();
+    }
+
+    @Override
     public void onCoffeeMenuListReady(List<CoffeeMenu> coffeeMenuList) {
         StringBuilder sb = new StringBuilder();
         for(CoffeeMenu menu : coffeeMenuList) {
@@ -45,14 +51,12 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
         CoffeeRecyclerAdapter adapter = new CoffeeRecyclerAdapter(coffeeMenuList);
         binding.recycler.setAdapter(adapter);
 
-        TextView txt = findViewById(R.id.txt_test);
-        txt.setText(sb.toString());
     }
 
     @Override
     public void onCoffeeMenuListError(String message) {
-        TextView txt = findViewById(R.id.txt_test);
-        txt.setText(message);
+//        TextView txt = findViewById(R.id.txt_test);
+//        txt.setText(message);
     }
 
 }

@@ -29,10 +29,6 @@ public class MainActivityViewModel {
         model.requestCoffeeMenu();
     }
 
-    public void onClickTestButton(View view) {
-        fetchCoffeeMenu();
-    }
-
     private class MyMenuCallback implements  MenuCallback {
         private MainViewInterface view;
 
