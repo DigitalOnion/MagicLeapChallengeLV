@@ -13,6 +13,8 @@ import com.outerspace.magicleapchallengelv.viewmodel.MenuCallback;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
@@ -28,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
                 .setContentView(this, R.layout.activity_main);
         viewModel = new MainActivityViewModel(this);
         binding.setViewModel(viewModel);
+
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
+        binding.recycler.setLayoutManager(manager);
     }
 
     @Override

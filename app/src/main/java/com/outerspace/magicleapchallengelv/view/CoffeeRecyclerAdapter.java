@@ -27,7 +27,7 @@ public class CoffeeRecyclerAdapter extends RecyclerView.Adapter<CoffeeRecyclerAd
     @Override
     public CoffeeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         parentContext = parent.getContext();
-        View view =  LayoutInflater.from(parentContext).inflate(R.layout.coffee_holder, parent);
+        View view =  LayoutInflater.from(parentContext).inflate(R.layout.coffee_holder, parent, false);
         CoffeeViewHolder holder = new CoffeeViewHolder(view);
         return holder;
     }
