@@ -17,19 +17,18 @@ import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements MainViewInterface {
-
+    ActivityMainBinding binding;
     MainActivityViewModel viewModel = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ActivityMainBinding binding = DataBindingUtil
+        binding = DataBindingUtil
                 .setContentView(this, R.layout.activity_main);
         viewModel = new MainActivityViewModel(this);
         binding.setViewModel(viewModel);
     }
-
 
     @Override
     public void onCoffeeMenuListReady(List<CoffeeMenu> coffeeMenuList) {
@@ -37,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
         for(CoffeeMenu menu : coffeeMenuList) {
             sb.append(menu.name).append('\n');
         }
+
+        CoffeeRecyclerAdapter adapter = new CoffeeRecyclerAdapter(coffeeMenuList);
+        binding.recycler.setAdapter(adapter);
 
         TextView txt = findViewById(R.id.txt_test);
         txt.setText(sb.toString());
